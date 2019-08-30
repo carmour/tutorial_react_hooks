@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import useResources from './useResources';
 
 // class ResourceList extends React.Component {
 //   state = {
@@ -28,19 +28,22 @@ import axios from 'axios';
 // class based component refactored into function based component below
 
 // a custom hook that we are creating. by convention, all hooks are named starting with 'use'
-const useResources = (resourceName) => {
-  const [resources, setResources] = useState([]);
-  const fetchResources = async (resourceName) => {
-    const response = await axios.get(`https://jsonplaceholder.typicode.com/${resourceName}`);
-    setResources(response.data);
-  }
-  useEffect(() => {
-    fetchResources(resourceName)
-  }, [resourceName])
-  // useEffect will check to see if the array (resourceName) changes -- if it has changed, then it will update the component
-  // if it hasn't changed, it will not make any further requests -- this is excellent for us to prevent unnecessary requests
-  return resources;
-}
+// we have refactored the logic from our component into an individual hook variable
+// this is useful if, for example, we want to reuse the logic from this function elsewhere in our programs
+// we could take this one step further and create this function in a separate file and import it here in this file
+// const useResources = (resourceName) => {
+//   const [resources, setResources] = useState([]);
+//   const fetchResources = async (resourceName) => {
+//     const response = await axios.get(`https://jsonplaceholder.typicode.com/${resourceName}`);
+//     setResources(response.data);
+//   }
+//   useEffect(() => {
+//     fetchResources(resourceName)
+//   }, [resourceName])
+//   // useEffect will check to see if the array (resourceName) changes -- if it has changed, then it will update the component
+//   // if it hasn't changed, it will not make any further requests -- this is excellent for us to prevent unnecessary requests
+//   return resources;
+// }
 
 const ResourceList = ({ resourceName }) => {
   // const [resources, setResources] = useState([]);
